@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -92,9 +92,9 @@ registerLocaleData(en);
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     // Ant Design Modules
     NzAffixModule,
@@ -164,6 +164,7 @@ registerLocaleData(en);
     NzResizableModule,
     NzPipesModule
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, TodoListService],
   bootstrap: [AppComponent]
 })

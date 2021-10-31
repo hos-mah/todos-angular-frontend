@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Todo } from '../models/Todo';
 
 
-@Injectable()
+@Injectable({providedIn:'root'})
 export class TodoListService {
   private resourceUrl = 'http://localhost:8082/todos'
 
@@ -14,20 +14,20 @@ export class TodoListService {
     const copy = this.convert(todo);
     return this.http.post<Todo>(this.resourceUrl, copy);
 
-  } 
-  
+  }
+
   update(todo: Todo): Observable<Todo>{
     const copy = this.convert(todo);
     return this.http.put<Todo>(`${this.resourceUrl}/${copy.id}`, copy);
 
-  } 
+  }
 
   find(id: number): Observable<Todo>{
     return this.http.get<Todo>(`${this.resourceUrl}/${id}`);
   }
-  
+
   findAll(): Observable<Todo[]>{
-    return this.http.get<Todo[]>(this.resourceUrl);
+    return this.http.get<Todo[]>(`${this.resourceUrl}`);
   }
 
   delete(id: number | undefined): Observable<HttpResponse<any>>{

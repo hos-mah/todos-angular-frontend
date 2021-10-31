@@ -10,28 +10,28 @@ import { TodoListService } from './todo-list.service';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  
-  todos$!: Observable<Todo[]>;
-  
+
+  todos!: Observable<Todo[]>;
+
   constructor(
     private todoListService: TodoListService,
     private nzMessageService: NzMessageService
   ) { }
 
   loadAll = () =>{
-    this.todos$ = this.todoListService.findAll();
+    this.todos = this.todoListService.findAll();
   }
 
   changeStatus(todo: Todo){
     this.todoListService.update(todo).subscribe(() => {
-      this.todos$ = this.todoListService.findAll();
+      this.todos = this.todoListService.findAll();
     });
     this.nzMessageService.info('Changed Status');
   }
 
   deleteTodo(todo: Todo){
     this.todoListService.delete(todo.id).subscribe(() => {
-      this.todos$ = this.todoListService.findAll();
+      this.todos = this.todoListService.findAll();
     });
     this.nzMessageService.warning('Todo Item Deleted!');
   }
@@ -39,7 +39,7 @@ export class TodoListComponent implements OnInit {
   cancel(): void{
     this.nzMessageService.info("Click Cancelled");
 
-  } 
+  }
 
   ngOnInit(): void {
     this.loadAll();
